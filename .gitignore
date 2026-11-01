@@ -1,0 +1,28 @@
+# OS / エディタ
+.DS_Store
+.idea/
+
+# Claude Code の worktree と個人の設定
+.claude/worktrees/
+.claude/settings.local.json
+
+# mise の個人用の上書き
+mise.local.toml
+
+# 秘密情報
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+dist/
+
+# Rust
+target/
+
+# モデルと個人のデータ
+models/
+*.wav
+*.sqlite
+*.sqlite-*

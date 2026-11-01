@@ -1,0 +1,4 @@
+# sherpa-onnx の Windows 向け静的ライブラリは /MT でビルドされている。
+# Rust の既定は /MD 相当なので、CRT の不一致で失敗しないように静的 CRT に揃える。
+[target.'cfg(all(windows, target_env = "msvc"))']
+rustflags = ["-C", "target-feature=+crt-static"]

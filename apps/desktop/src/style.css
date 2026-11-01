@@ -1,0 +1,157 @@
+:root {
+  color-scheme: light dark;
+  --card-bg: rgb(250 250 248 / 0.94);
+  --card-border: rgb(0 0 0 / 0.08);
+  --card-shadow: 0 1px 4px rgb(0 0 0 / 0.14);
+  --text: #26282b;
+  --muted: #676b70;
+  --link: #2a5f8f;
+  --button-hover: rgb(0 0 0 / 0.06);
+  --button-border: rgb(0 0 0 / 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --card-bg: rgb(38 40 43 / 0.94);
+    --card-border: rgb(255 255 255 / 0.1);
+    --card-shadow: 0 1px 4px rgb(0 0 0 / 0.4);
+    --text: #e8e8e4;
+    --muted: #a4a8ac;
+    --link: #8fbde6;
+    --button-hover: rgb(255 255 255 / 0.08);
+    --button-border: rgb(255 255 255 / 0.16);
+  }
+}
+
+html,
+body {
+  margin: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI",
+    "Segoe UI", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+  /* 文字の選択はクリックの邪魔になるだけなので切る */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* 透明な余白もクリックを受けるので、影が切れない最小限にする */
+.stack {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 360px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  animation: appear 240ms ease-out;
+  transition: opacity 600ms ease;
+}
+
+.card.leaving {
+  opacity: 0;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
+    transition: none;
+  }
+}
+
+.card p {
+  margin: 0;
+}
+
+.card .kind {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.card .text {
+  margin-top: 2px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+  /* 外部の長い文で画面を埋めないようにする */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+}
+
+.evidence {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.evidence a {
+  color: var(--link);
+}
+
+.card .action-detail {
+  margin-top: 6px;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.card .accepted {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.buttons {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+button {
+  font: inherit;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 2px 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  cursor: default;
+}
+
+button:hover {
+  background: var(--button-hover);
+  color: var(--text);
+}
+
+button.primary {
+  margin-right: auto;
+  color: var(--text);
+  border-color: var(--button-border);
+}

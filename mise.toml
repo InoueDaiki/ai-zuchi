@@ -1,0 +1,45 @@
+# ツールの版とタスク
+
+[tools]
+node = "24.21.0"
+pnpm = "12.10.1"
+rust = { version = "1.99.1", components = "rustfmt,clippy" }
+python = "3.14.8"
+uv = "0.12.23"
+
+[tasks.setup]
+description = "依存関係をインストールする"
+run = "pnpm install"
+
+[tasks.fmt]
+description = "整形"
+run = "cargo fmt --all"
+
+[tasks.lint]
+description = "lint と型検査"
+depends = ["setup"]
+run = [
+  "cargo fmt --all --check",
+  "pnpm --filter desktop build",
+  "cargo clippy --workspace --all-targets -- -D warnings",
+  "pnpm --filter desktop lint",
+  "pnpm --filter desktop typecheck",
+]
+
+[tasks.test]
+description = "テスト"
+depends = ["setup"]
+run = [
+  "pnpm --filter desktop test",
+  "pnpm --filter desktop build",
+  "cargo test --workspace",
+]
+
+[tasks."models:fetch"]
+description = "VAD と文字起こしのモデルを models/ へ取得する"
+run = "bash scripts/fetch-models.sh"
+
+[tasks.dev]
+description = "デスクトップアプリを開発モードで起動する"
+depends = ["setup"]
+run = "pnpm --filter desktop tauri dev"

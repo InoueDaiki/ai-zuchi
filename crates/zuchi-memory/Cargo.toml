@@ -1,0 +1,19 @@
+[package]
+name = "zuchi-memory"
+description = "MemoryStore の SQLite 実装。SQLCipher で暗号化し、全文検索とベクトル検索を併用する"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+zuchi-core = { path = "../zuchi-core" }
+# Mac と Windows で同じ暗号の実装にするため、OpenSSL ごと同梱する。
+# Windows のビルドには Perl が要る(MSVC と共に GitHub の windows-latest に入っている)
+rusqlite = { version = "0.41", features = ["bundled-sqlcipher-vendored-openssl"] }
+serde_json = "1"
+
+[dev-dependencies]
+tempfile = "3"

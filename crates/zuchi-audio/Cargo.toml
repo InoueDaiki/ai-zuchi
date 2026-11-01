@@ -1,0 +1,13 @@
+[package]
+name = "zuchi-audio"
+description = "マイクと PC の音声を 16 kHz モノラルで取得する"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+cpal = "0.18"
+zuchi-core = { path = "../zuchi-core" }
+
+[lints]
+workspace = true

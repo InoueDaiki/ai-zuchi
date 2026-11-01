@@ -1,0 +1,16 @@
+[package]
+name = "zuchi-pipeline"
+description = "発話と画面の文字から、口を出すかを決めて補足を作る"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+regex = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+unicode-normalization = "0.1"
+zuchi-core = { path = "../zuchi-core" }
+
+[lints]
+workspace = true

@@ -1,0 +1,9 @@
+[package]
+name = "zuchi-core"
+description = "判定、スキル、確認などの OS に依存しない部分と、外部との境界"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true

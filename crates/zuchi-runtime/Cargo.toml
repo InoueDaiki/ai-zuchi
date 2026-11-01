@@ -1,0 +1,24 @@
+[package]
+name = "zuchi-runtime"
+description = "取得、文字起こし、判定、記憶をスレッドでつなぐ"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+getrandom = "0.3"
+keyring = { version = "3", features = ["apple-native", "windows-native"] }
+zuchi-asr = { path = "../zuchi-asr" }
+zuchi-audio = { path = "../zuchi-audio" }
+zuchi-core = { path = "../zuchi-core" }
+zuchi-llm = { path = "../zuchi-llm" }
+zuchi-memory = { path = "../zuchi-memory" }
+zuchi-pipeline = { path = "../zuchi-pipeline" }
+zuchi-screen = { path = "../zuchi-screen" }
+zuchi-search = { path = "../zuchi-search" }
+
+[dev-dependencies]
+tempfile = "3"
+
+[lints]
+workspace = true
