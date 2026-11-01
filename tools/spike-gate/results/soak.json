@@ -1,0 +1,232 @@
+{
+ "gemma4:e4b": {
+  "calls": 288,
+  "identical_to_lap1": [
+   96,
+   96
+  ],
+  "wall_p50_ms": 585.3805829538032,
+  "wall_p95_ms": 965.0269579142332,
+  "memory_trace": [
+   {
+    "calls": 1,
+    "ps_size_gb": 9.43139276,
+    "ps_vram_gb": 9.43139276,
+    "context_length": 4096,
+    "runner_rss_gb": 9.11048704,
+    "runner_footprint_gb": 9.298
+   },
+   {
+    "calls": 24,
+    "ps_size_gb": 10.565542392,
+    "ps_vram_gb": 10.565542392,
+    "context_length": 4096,
+    "runner_rss_gb": 9.135325184,
+    "runner_footprint_gb": 10.0
+   },
+   {
+    "calls": 48,
+    "ps_size_gb": 11.688026616,
+    "ps_vram_gb": 11.688026616,
+    "context_length": 4096,
+    "runner_rss_gb": 9.139290112,
+    "runner_footprint_gb": 11.0
+   },
+   {
+    "calls": 72,
+    "ps_size_gb": 12.809839096,
+    "ps_vram_gb": 12.809839096,
+    "context_length": 4096,
+    "runner_rss_gb": 9.143795712,
+    "runner_footprint_gb": 12.0
+   },
+   {
+    "calls": 96,
+    "ps_size_gb": 13.993959928,
+    "ps_vram_gb": 13.993959928,
+    "context_length": 4096,
+    "runner_rss_gb": 9.149431808,
+    "runner_footprint_gb": 13.0
+   },
+   {
+    "calls": 120,
+    "ps_size_gb": 14.189150712,
+    "ps_vram_gb": 14.189150712,
+    "context_length": 4096,
+    "runner_rss_gb": 9.151086592,
+    "runner_footprint_gb": 13.0
+   },
+   {
+    "calls": 144,
+    "ps_size_gb": 14.275314168,
+    "ps_vram_gb": 14.275314168,
+    "context_length": 4096,
+    "runner_rss_gb": 9.151561728,
+    "runner_footprint_gb": 14.0
+   },
+   {
+    "calls": 168,
+    "ps_size_gb": 14.40434636,
+    "ps_vram_gb": 14.40434636,
+    "context_length": 4096,
+    "runner_rss_gb": 9.15300352,
+    "runner_footprint_gb": 14.0
+   },
+   {
+    "calls": 192,
+    "ps_size_gb": 14.576136696,
+    "ps_vram_gb": 14.576136696,
+    "context_length": 4096,
+    "runner_rss_gb": 9.153888256,
+    "runner_footprint_gb": 14.0
+   },
+   {
+    "calls": 216,
+    "ps_size_gb": 14.619156984,
+    "ps_vram_gb": 14.619156984,
+    "context_length": 4096,
+    "runner_rss_gb": 9.154756608,
+    "runner_footprint_gb": 14.0
+   },
+   {
+    "calls": 240,
+    "ps_size_gb": 14.6414638,
+    "ps_vram_gb": 14.6414638,
+    "context_length": 4096,
+    "runner_rss_gb": 9.15488768,
+    "runner_footprint_gb": 14.0
+   },
+   {
+    "calls": 264,
+    "ps_size_gb": 14.770127352,
+    "ps_vram_gb": 14.770127352,
+    "context_length": 4096,
+    "runner_rss_gb": 9.155231744,
+    "runner_footprint_gb": 14.0
+   },
+   {
+    "calls": 288,
+    "ps_size_gb": 14.770389496,
+    "ps_vram_gb": 14.770389496,
+    "context_length": 4096,
+    "runner_rss_gb": 9.15529728,
+    "runner_footprint_gb": 14.0
+   }
+  ]
+ },
+ "gemma4:e4b-it-q4_K_M": {
+  "calls": 288,
+  "identical_to_lap1": [
+   96,
+   96
+  ],
+  "wall_p50_ms": 1167.9336670786142,
+  "wall_p95_ms": 1655.0909590441734,
+  "memory_trace": [
+   {
+    "calls": 1,
+    "ps_size_gb": 0.261315624,
+    "ps_vram_gb": 0.261315624,
+    "context_length": 4096,
+    "runner_rss_gb": 7.106822144,
+    "runner_footprint_gb": 1.48
+   },
+   {
+    "calls": 24,
+    "ps_size_gb": 0.261315624,
+    "ps_vram_gb": 0.261315624,
+    "context_length": 4096,
+    "runner_rss_gb": 7.17062144,
+    "runner_footprint_gb": 1.54
+   },
+   {
+    "calls": 48,
+    "ps_size_gb": 0.261315624,
+    "ps_vram_gb": 0.261315624,
+    "context_length": 4096,
+    "runner_rss_gb": 7.17078528,
+    "runner_footprint_gb": 1.54
+   },
+   {
+    "calls": 72,
+    "ps_size_gb": 0.261315624,
+    "ps_vram_gb": 0.261315624,
+    "context_length": 4096,
+    "runner_rss_gb": 7.072661504,
+    "runner_footprint_gb": 1.447
+   },
+   {
+    "calls": 96,
+    "ps_size_gb": 0.261315624,
+    "ps_vram_gb": 0.261315624,
+    "context_length": 4096,
+    "runner_rss_gb": 7.072858112,
+    "runner_footprint_gb": 1.447
+   },
+   {
+    "calls": 120,
+    "ps_size_gb": 0.261315624,
+    "ps_vram_gb": 0.261315624,
+    "context_length": 4096,
+    "runner_rss_gb": 7.0938624,
+    "runner_footprint_gb": 1.467
+   },
+   {
+    "calls": 144,
+    "ps_size_gb": 0.261315624,
+    "ps_vram_gb": 0.261315624,
+    "context_length": 4096,
+    "runner_rss_gb": 7.093878784,
+    "runner_footprint_gb": 1.467
+   },
+   {
+    "calls": 168,
+    "ps_size_gb": 0.261315624,
+    "ps_vram_gb": 0.261315624,
+    "context_length": 4096,
+    "runner_rss_gb": 7.093878784,
+    "runner_footprint_gb": 1.467
+   },
+   {
+    "calls": 192,
+    "ps_size_gb": 0.261315624,
+    "ps_vram_gb": 0.261315624,
+    "context_length": 4096,
+    "runner_rss_gb": 7.093878784,
+    "runner_footprint_gb": 1.467
+   },
+   {
+    "calls": 216,
+    "ps_size_gb": 0.261315624,
+    "ps_vram_gb": 0.261315624,
+    "context_length": 4096,
+    "runner_rss_gb": 7.093878784,
+    "runner_footprint_gb": 1.467
+   },
+   {
+    "calls": 240,
+    "ps_size_gb": 0.261315624,
+    "ps_vram_gb": 0.261315624,
+    "context_length": 4096,
+    "runner_rss_gb": 7.093878784,
+    "runner_footprint_gb": 1.467
+   },
+   {
+    "calls": 264,
+    "ps_size_gb": 0.261315624,
+    "ps_vram_gb": 0.261315624,
+    "context_length": 4096,
+    "runner_rss_gb": 7.093878784,
+    "runner_footprint_gb": 1.467
+   },
+   {
+    "calls": 288,
+    "ps_size_gb": 0.261315624,
+    "ps_vram_gb": 0.261315624,
+    "context_length": 4096,
+    "runner_rss_gb": 7.093878784,
+    "runner_footprint_gb": 1.467
+   }
+  ]
+ }
+}

@@ -14,7 +14,7 @@ use crate::overlay::{Overlay, OverlayEvent};
 use crate::reminders::{self, ReminderCommand, ReminderInbox};
 use crate::tray;
 
-const DEFAULT_CHAT_MODEL: &str = "gemma4:e4b";
+const DEFAULT_CHAT_MODEL: &str = "gemma4:e4b-it-q4_K_M";
 const DEFAULT_EMBED_MODEL: &str = "embeddinggemma";
 /// 一時停止の切り替えが取得へ届くまでの最大の時間
 const SYNC_INTERVAL: Duration = Duration::from_millis(300);

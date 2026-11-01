@@ -241,6 +241,11 @@ impl Runtime {
             .send(Message::Utterance(utterance.clone()));
         let _ = self.engine_input.send(Input::Utterance(utterance));
     }
+
+    /// 画面の文字を入れる。再生で使う。
+    pub fn inject_screen(&self, screen: ScreenText) {
+        let _ = self.engine_input.send(Input::Screen(screen));
+    }
 }
 
 fn build_searcher(

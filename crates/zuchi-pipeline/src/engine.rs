@@ -50,6 +50,8 @@ pub struct Engine {
     context: ContextWindow,
     checker: Checker,
     min_confidence: f64,
+    /// 直前の発話が手がかりを持っていれば、その文字列。
+    previous_cue: Option<String>,
 }
 
 impl Engine {
@@ -66,16 +68,20 @@ impl Engine {
             context: ContextWindow::new(config.context_span),
             checker: Checker::new(config.check),
             min_confidence: config.min_confidence,
+            previous_cue: None,
         }
     }
 
     /// 入力を文脈へ入れる。LLM を呼ぶ価値があれば、判定の手がかりの文字列を返す。
+    /// 発話は直近の 2 つまで見る。最後の発話だけでは、答えが出ないまま相づちで終わる場面を落とす。
     fn absorb(&mut self, input: Input) -> Option<(String, SystemTime)> {
         match input {
             Input::Utterance(u) => {
-                let cue = rules::utterance_passes(&u.text).then(|| (u.text.clone(), u.ended_at));
+                let cue = rules::utterance_passes(&u.text).then(|| u.text.clone());
+                let previous = std::mem::replace(&mut self.previous_cue, cue.clone());
+                let at = u.ended_at;
                 self.context.push_utterance(u);
-                cue
+                cue.or(previous).map(|text| (text, at))
             }
             Input::Screen(s) => {
                 let cue = rules::screen_passes(&s.text).then(|| (s.text.clone(), s.captured_at));
@@ -273,6 +279,28 @@ mod tests {
             Some(Arc::new(FakeMemory)),
             EngineConfig::default(),
         )
+    }
+
+    #[test]
+    fn 手がかりの次の発話まで判定する() {
+        let llm = FakeLlm::new(r#"{"skill":"none","confidence":0.9,"reason":""}"#);
+        let mut engine = Engine::new(llm.clone(), None, None, EngineConfig::default());
+        let say = |text: &str| {
+            Input::Utterance(Utterance {
+                channel: AudioChannel::System,
+                text: text.into(),
+                started_at: SystemTime::UNIX_EPOCH,
+                ended_at: SystemTime::UNIX_EPOCH,
+            })
+        };
+        engine.handle(say("そうですね")).unwrap();
+        assert_eq!(llm.calls(), 0);
+        engine.handle(say("3カ月で10億件かぁ")).unwrap();
+        assert_eq!(llm.calls(), 1);
+        engine.handle(say("すごいね")).unwrap();
+        assert_eq!(llm.calls(), 2);
+        engine.handle(say("ほんとに")).unwrap();
+        assert_eq!(llm.calls(), 2);
     }
 
     #[test]

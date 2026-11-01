@@ -1,7 +1,7 @@
 //! 手元の Ollama との結合テスト。Ollama やモデルがなければスキップする。
 //!
 //! 使うモデルは環境変数で指定する。
-//! `ZUCHI_TEST_CHAT_MODEL=gemma4:e4b ZUCHI_TEST_EMBED_MODEL=bge-m3 cargo test -p zuchi-llm`
+//! `ZUCHI_TEST_CHAT_MODEL=gemma4:e4b-it-q4_K_M ZUCHI_TEST_EMBED_MODEL=bge-m3 cargo test -p zuchi-llm`
 
 use std::env;
 

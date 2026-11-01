@@ -1,0 +1,157 @@
+[
+ {
+  "name": "gemma4-e4b-schema",
+  "ok": 8,
+  "n": 13,
+  "p50_ms": 847.2244159784168,
+  "p95_ms": 1113.8000829378143,
+  "failed": [
+   "e-calc-02",
+   "e-calc-03",
+   "e-calc-04",
+   "e-calc-05",
+   "e-calc-06"
+  ]
+ },
+ {
+  "name": "gemma4-e4b-free",
+  "ok": 8,
+  "n": 13,
+  "p50_ms": 614.2223750939593,
+  "p95_ms": 877.4400000693277,
+  "failed": [
+   "e-calc-02",
+   "e-calc-03",
+   "e-calc-04",
+   "e-calc-05",
+   "e-calc-06"
+  ]
+ },
+ {
+  "name": "gemma4-e4b-it-q4_K_M-schema",
+  "ok": 9,
+  "n": 13,
+  "p50_ms": 1399.857125012204,
+  "p95_ms": 1702.921082964167,
+  "failed": [
+   "e-calc-02",
+   "e-calc-03",
+   "e-calc-05",
+   "e-calc-06"
+  ]
+ },
+ {
+  "name": "gemma4-e4b-it-q4_K_M-free",
+  "ok": 9,
+  "n": 13,
+  "p50_ms": 1390.2023329865187,
+  "p95_ms": 1684.054541052319,
+  "failed": [
+   "e-calc-02",
+   "e-calc-03",
+   "e-calc-05",
+   "e-calc-06"
+  ]
+ },
+ {
+  "name": "gemma4-e2b-schema",
+  "ok": 7,
+  "n": 13,
+  "p50_ms": 500.9604579536244,
+  "p95_ms": 680.6727919029072,
+  "failed": [
+   "e-calc-02",
+   "e-calc-03",
+   "e-calc-05",
+   "e-calc-06",
+   "e-calc-09",
+   "e-calc-10"
+  ]
+ },
+ {
+  "name": "gemma4-e2b-free",
+  "ok": 7,
+  "n": 13,
+  "p50_ms": 377.9215830145404,
+  "p95_ms": 538.3920420426875,
+  "failed": [
+   "e-calc-02",
+   "e-calc-03",
+   "e-calc-05",
+   "e-calc-06",
+   "e-calc-09",
+   "e-calc-10"
+  ]
+ },
+ {
+  "name": "qwen3-4b-schema",
+  "ok": 5,
+  "n": 13,
+  "p50_ms": 1745.171583024785,
+  "p95_ms": 2140.822416986339,
+  "failed": [
+   "e-calc-02",
+   "e-calc-03",
+   "e-calc-04",
+   "e-calc-05",
+   "e-calc-06",
+   "e-calc-10",
+   "e-calc-11",
+   "e-calc-12"
+  ]
+ },
+ {
+  "name": "qwen3-4b-free",
+  "ok": 0,
+  "n": 13,
+  "p50_ms": 20268.430500058457,
+  "p95_ms": 20401.50266594719,
+  "failed": [
+   "e-calc-01",
+   "e-calc-02",
+   "e-calc-03",
+   "e-calc-04",
+   "e-calc-05",
+   "e-calc-06",
+   "e-calc-07",
+   "e-calc-08",
+   "e-calc-09",
+   "e-calc-10",
+   "e-calc-11",
+   "e-calc-12",
+   "e-calc-13"
+  ]
+ },
+ {
+  "name": "qwen3.5-4b-schema",
+  "ok": 6,
+  "n": 13,
+  "p50_ms": 1700.686166062951,
+  "p95_ms": 1998.8195420010015,
+  "failed": [
+   "e-calc-02",
+   "e-calc-03",
+   "e-calc-04",
+   "e-calc-05",
+   "e-calc-06",
+   "e-calc-09",
+   "e-calc-10"
+  ]
+ },
+ {
+  "name": "qwen3.5-4b-free",
+  "ok": 6,
+  "n": 13,
+  "p50_ms": 1338.7727909721434,
+  "p95_ms": 1868.010750040412,
+  "failed": [
+   "e-calc-02",
+   "e-calc-03",
+   "e-calc-04",
+   "e-calc-05",
+   "e-calc-06",
+   "e-calc-09",
+   "e-calc-10"
+  ]
+ }
+]

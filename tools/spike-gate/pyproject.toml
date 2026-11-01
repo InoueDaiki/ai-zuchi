@@ -1,0 +1,18 @@
+[project]
+name = "spike-gate"
+version = "0"
+description = "段階 0 検証: 口を出すかの判定。アプリには含めない"
+requires-python = ">=3.14"
+dependencies = [
+  "pyyaml",
+]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["scripts"]
+testpaths = ["tests"]

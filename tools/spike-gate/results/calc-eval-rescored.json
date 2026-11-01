@@ -1,0 +1,128 @@
+[
+ {
+  "name": "eval-gemma4-e2b-free",
+  "n": 13,
+  "value_ok": 8,
+  "value_and_unit_ok": 3,
+  "failed": [
+   "e-calc-02",
+   "e-calc-03",
+   "e-calc-05",
+   "e-calc-09",
+   "e-calc-10"
+  ]
+ },
+ {
+  "name": "eval-gemma4-e2b-schema",
+  "n": 13,
+  "value_ok": 8,
+  "value_and_unit_ok": 3,
+  "failed": [
+   "e-calc-02",
+   "e-calc-03",
+   "e-calc-05",
+   "e-calc-09",
+   "e-calc-10"
+  ]
+ },
+ {
+  "name": "eval-gemma4-e4b-free",
+  "n": 13,
+  "value_ok": 10,
+  "value_and_unit_ok": 6,
+  "failed": [
+   "e-calc-03",
+   "e-calc-04",
+   "e-calc-05"
+  ]
+ },
+ {
+  "name": "eval-gemma4-e4b-it-q4_K_M-free",
+  "n": 13,
+  "value_ok": 11,
+  "value_and_unit_ok": 6,
+  "failed": [
+   "e-calc-03",
+   "e-calc-05"
+  ]
+ },
+ {
+  "name": "eval-gemma4-e4b-it-q4_K_M-schema",
+  "n": 13,
+  "value_ok": 11,
+  "value_and_unit_ok": 6,
+  "failed": [
+   "e-calc-03",
+   "e-calc-05"
+  ]
+ },
+ {
+  "name": "eval-gemma4-e4b-schema",
+  "n": 13,
+  "value_ok": 10,
+  "value_and_unit_ok": 6,
+  "failed": [
+   "e-calc-03",
+   "e-calc-04",
+   "e-calc-05"
+  ]
+ },
+ {
+  "name": "eval-qwen3-4b-free",
+  "n": 13,
+  "value_ok": 0,
+  "value_and_unit_ok": 0,
+  "failed": [
+   "e-calc-01",
+   "e-calc-02",
+   "e-calc-03",
+   "e-calc-04",
+   "e-calc-05",
+   "e-calc-06",
+   "e-calc-07",
+   "e-calc-08",
+   "e-calc-09",
+   "e-calc-10",
+   "e-calc-11",
+   "e-calc-12",
+   "e-calc-13"
+  ]
+ },
+ {
+  "name": "eval-qwen3-4b-schema",
+  "n": 13,
+  "value_ok": 8,
+  "value_and_unit_ok": 6,
+  "failed": [
+   "e-calc-04",
+   "e-calc-05",
+   "e-calc-10",
+   "e-calc-11",
+   "e-calc-12"
+  ]
+ },
+ {
+  "name": "eval-qwen3.5-4b-free",
+  "n": 13,
+  "value_ok": 9,
+  "value_and_unit_ok": 7,
+  "failed": [
+   "e-calc-04",
+   "e-calc-05",
+   "e-calc-09",
+   "e-calc-10"
+  ]
+ },
+ {
+  "name": "eval-qwen3.5-4b-schema",
+  "n": 13,
+  "value_ok": 9,
+  "value_and_unit_ok": 7,
+  "failed": [
+   "e-calc-04",
+   "e-calc-05",
+   "e-calc-09",
+   "e-calc-10"
+  ]
+ }
+]

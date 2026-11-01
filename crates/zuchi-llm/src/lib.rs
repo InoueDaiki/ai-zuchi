@@ -93,9 +93,27 @@ struct ChatMessage<'a> {
     content: &'a str,
 }
 
+/// 判定の評価と同じ値にする。同じ入力には同じ判定を返す。
 #[derive(Serialize)]
 struct ChatOptions {
-    num_predict: u32,
+    temperature: f32,
+    top_k: u32,
+    seed: u32,
+    num_ctx: u32,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    num_predict: Option<u32>,
+}
+
+impl ChatOptions {
+    fn new(num_predict: Option<u32>) -> Self {
+        Self {
+            temperature: 0.0,
+            top_k: 1,
+            seed: 42,
+            num_ctx: 4096,
+            num_predict,
+        }
+    }
 }
 
 #[derive(Serialize)]
@@ -103,10 +121,12 @@ struct ChatRequest<'a> {
     model: &'a str,
     messages: Vec<ChatMessage<'a>>,
     stream: bool,
+    /// 思考は判定の質を上げず、遅延と `num_predict` を費やす。送らないと既定で有効になる
+    think: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
     format: Option<Value>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    options: Option<ChatOptions>,
+    keep_alive: &'a str,
+    options: ChatOptions,
 }
 
 #[derive(Deserialize)]
@@ -249,10 +269,10 @@ impl OllamaLlm {
             model: &self.config.chat_model,
             messages,
             stream: false,
+            think: false,
             format,
-            options: request
-                .max_tokens
-                .map(|num_predict| ChatOptions { num_predict }),
+            keep_alive: "30m",
+            options: ChatOptions::new(request.max_tokens),
         };
 
         let raw = self.post(
@@ -322,5 +342,30 @@ fn map_transport_error(error: ureq::Error) -> OllamaError {
         }
         ureq::Error::Timeout(_) => OllamaError::Timeout,
         other => OllamaError::Unreachable(other.to_string()),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn 評価と同じ条件で送りスキーマの順を保つ() {
+        let schema: Value =
+            serde_json::from_str(r#"{"properties":{"reason":{},"skill":{}},"type":"object"}"#)
+                .unwrap();
+        let body = ChatRequest {
+            model: "m",
+            messages: vec![],
+            stream: false,
+            think: false,
+            format: Some(schema),
+            keep_alive: "30m",
+            options: ChatOptions::new(Some(120)),
+        };
+        let json = serde_json::to_string(&body).unwrap();
+        assert!(json.contains(r#""think":false"#));
+        assert!(json.contains(r#""temperature":0.0,"top_k":1,"seed":42,"num_ctx":4096"#));
+        assert!(json.find("reason") < json.find("skill"));
     }
 }

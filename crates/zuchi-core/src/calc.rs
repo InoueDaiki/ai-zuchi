@@ -126,7 +126,7 @@ fn trim(value: f64) -> String {
 
 /// 「10億」「1.5万」「3千」「2億5000万」を数にする。読めなければ `None`。
 pub fn parse_ja_number(text: &str) -> Option<f64> {
-    let normalized: String = text
+    let cleaned: String = text
         .chars()
         .filter(|c| !matches!(c, ',' | '\u{FF0C}' | ' ' | '\u{3000}'))
         .map(|c| match c {
@@ -134,9 +134,27 @@ pub fn parse_ja_number(text: &str) -> Option<f64> {
                 char::from_u32(c as u32 - '\u{FF10}' as u32 + '0' as u32).unwrap_or(c)
             }
             '\u{FF0E}' => '.',
+            '〇' | '零' => '0',
+            '一' => '1',
+            '二' => '2',
+            '三' => '3',
+            '四' => '4',
+            '五' => '5',
+            '六' => '6',
+            '七' => '7',
+            '八' => '8',
+            '九' => '9',
             _ => c,
         })
         .collect();
+    let normalized = ["約", "およそ"]
+        .iter()
+        .find_map(|prefix| cleaned.strip_prefix(prefix))
+        .unwrap_or(&cleaned);
+    let normalized = ["くらい", "ほど", "弱", "強", "円", "件", "人"]
+        .iter()
+        .find_map(|suffix| normalized.strip_suffix(suffix))
+        .unwrap_or(normalized);
     if normalized.is_empty() {
         return None;
     }
@@ -230,6 +248,9 @@ mod tests {
 
     #[test]
     fn 日本語の数を読む() {
+        assert_eq!(parse_ja_number("五千万"), Some(5e7));
+        assert_eq!(parse_ja_number("約10億件"), Some(1e9));
+        assert_eq!(parse_ja_number("3万くらい"), Some(3e4));
         assert_eq!(parse_ja_number("10億"), Some(1e9));
         assert_eq!(parse_ja_number("1.5万"), Some(15_000.0));
         assert_eq!(parse_ja_number("3千"), Some(3_000.0));
