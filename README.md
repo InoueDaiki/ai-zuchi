@@ -46,7 +46,7 @@ flowchart LR
 | 領域 | 方針 | 状態 |
 |---|---|---|
 | アプリ | Tauri 2(Rust + React + TypeScript) | 仮決定 |
-| LLM | Ollama を HTTP で使う。モデルは Gemma 4 E4B から検証する | 要検証 |
+| LLM | Ollama を HTTP で使う。既定のモデルは `gemma4:e4b-it-q4_K_M`。[検証](docs/検証-判定.md)は台本のみで、本物の会議では未測定 | 仮決定 |
 | 文字起こし | sherpa-onnx、silero VAD、日本語 zipformer を発話区間ごとに使う | 要検証 |
 | PC の音声 | macOS は Core Audio tap(Swift の補助プログラム)、Windows は WASAPI loopback | 要検証 |
 | 画面 | ScreenCaptureKit / Windows.Graphics.Capture と OS の OCR | 要検証 |

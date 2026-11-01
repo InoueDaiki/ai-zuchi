@@ -7,7 +7,7 @@
 use std::sync::mpsc;
 use std::time::{Duration, SystemTime};
 
-use zuchi_core::types::{AudioChannel, Utterance};
+use zuchi_core::types::{AudioChannel, ScreenText, Utterance};
 use zuchi_memory::MemoryKey;
 use zuchi_runtime::{Runtime, RuntimeConfig};
 
@@ -36,6 +36,20 @@ fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             continue;
         };
         let at = SystemTime::now();
+        if speaker == "画面" {
+            runtime.inject_screen(ScreenText {
+                app: String::new(),
+                window_title: String::new(),
+                text: text.trim().to_string(),
+                captured_at: at,
+            });
+            println!("{line}");
+            match received.recv_timeout(Duration::from_secs(45)) {
+                Ok(suggestion) => println!("  -> {} {:?}", suggestion.text, suggestion.evidence),
+                Err(_) => println!("  -> (黙る)"),
+            }
+            continue;
+        }
         runtime.inject(Utterance {
             channel: if speaker == "自分" {
                 AudioChannel::Mic

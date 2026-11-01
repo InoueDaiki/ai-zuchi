@@ -40,12 +40,22 @@ struct Extracted {
 /// 「3カ月」「2週間」「1日」を読む。
 pub fn parse_period(text: &str) -> Option<(f64, PeriodUnit)> {
     let text = text.trim();
+    let text = text.strip_prefix('毎').unwrap_or(text);
+    match text {
+        "半年" => return Some((6.0, PeriodUnit::Month)),
+        "月" => return Some((1.0, PeriodUnit::Month)),
+        "週" => return Some((1.0, PeriodUnit::Week)),
+        "日" => return Some((1.0, PeriodUnit::Day)),
+        "年" => return Some((1.0, PeriodUnit::Year)),
+        _ => {}
+    }
     for (suffix, unit) in [
         ("カ月", PeriodUnit::Month),
         ("ヶ月", PeriodUnit::Month),
         ("ケ月", PeriodUnit::Month),
         ("か月", PeriodUnit::Month),
         ("ヵ月", PeriodUnit::Month),
+        ("月間", PeriodUnit::Month),
         ("週間", PeriodUnit::Week),
         ("時間", PeriodUnit::Hour),
         ("日間", PeriodUnit::Day),
@@ -81,13 +91,35 @@ pub fn calc(llm: &dyn Llm, context: &str) -> Result<Option<Suggestion>> {
     }))
 }
 
+/// 単位の欄が空なら、「10億件」のように総量の末尾の単位を使う。
+fn rate_unit(e: &Extracted) -> String {
+    if !e.unit.is_empty() {
+        return e.unit.clone();
+    }
+    let total = e.total.trim_end();
+    ["件", "人", "円"]
+        .into_iter()
+        .find(|unit| total.ends_with(unit))
+        .unwrap_or("")
+        .to_string()
+}
+
+/// モデルが本文に書いた出典の番号を除く。出典は `source` の欄で受け取る。
+fn clean_answer(text: &str) -> String {
+    text.split(" (source")
+        .next()
+        .unwrap_or(text)
+        .trim()
+        .to_string()
+}
+
 fn compute(e: &Extracted) -> Option<(String, Vec<Evidence>)> {
     match e.op.as_str() {
         "rate" => {
             let (period, period_unit) = parse_period(&e.period)?;
             let output = convert_rate(&RateInput {
                 amount: parse_ja_number(&e.total)?,
-                unit: e.unit.clone(),
+                unit: rate_unit(e),
                 period,
                 period_unit,
             })?;
@@ -179,7 +211,7 @@ pub fn search(
     };
     let suggestion = Suggestion {
         skill: Skill::Search,
-        text: answer.answer.trim().to_string(),
+        text: clean_answer(&answer.answer),
         evidence: vec![Evidence::Web {
             title: hit.title.clone(),
             url: hit.url.clone(),
@@ -221,7 +253,7 @@ pub fn memory(
     };
     Ok(Some(Suggestion {
         skill: Skill::Memory,
-        text: answer.answer.trim().to_string(),
+        text: clean_answer(&answer.answer),
         evidence: vec![item.evidence.clone()],
         action: None,
     }))
@@ -255,6 +287,23 @@ pub fn suggest(llm: &dyn Llm, context: &str) -> Result<Option<Suggestion>> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn 総量の末尾から単位を補う() {
+        let e = Extracted {
+            total: "10億件".into(),
+            ..Default::default()
+        };
+        assert_eq!(rate_unit(&e), "件");
+    }
+
+    #[test]
+    fn 本文の出典番号を除く() {
+        assert_eq!(
+            clean_answer("人気があります。 (source: 1)"),
+            "人気があります。"
+        );
+    }
 
     #[test]
     fn 期間を読む() {

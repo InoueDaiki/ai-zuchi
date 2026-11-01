@@ -115,7 +115,9 @@ fn スキーマなしでは_format_を送らない() {
     assert_eq!(output, "こんにちは");
     let body: Value = serde_json::from_str(&requests.recv().unwrap().body).unwrap();
     assert!(body.get("format").is_none());
-    assert!(body.get("options").is_none());
+    assert_eq!(body["think"], false);
+    assert_eq!(body["options"]["temperature"], 0.0);
+    assert!(body["options"].get("num_predict").is_none());
     assert_eq!(body["messages"].as_array().unwrap().len(), 1);
 }
 
