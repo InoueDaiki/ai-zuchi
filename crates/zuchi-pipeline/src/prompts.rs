@@ -112,7 +112,8 @@ mod tests {
 
     #[test]
     fn 判定と抽出のプロンプトは評価したものと同じ() {
-        let evaluated = include_str!("../../../tools/spike-gate/scripts/prompts.py");
+        let evaluated =
+            include_str!("../../../tools/spike-gate/scripts/prompts.py").replace("\r\n", "\n");
         for prompt in [GATE_SYSTEM, GATE_EXAMPLES, EXTRACT_SYSTEM] {
             assert!(evaluated.contains(prompt), "{prompt}");
         }
